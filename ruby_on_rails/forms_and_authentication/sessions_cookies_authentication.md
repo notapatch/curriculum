@@ -89,11 +89,11 @@ You still have to write view code to display the flash messages.  It's common to
   <% end %>
 ~~~
 
-### Controller filters
+### Controller actions
 
-Before we talk about authentication, we need to cover controller filters.  The idea of these filters is to run some code in your controller at very specific times, for instance before any other code has been run.  That's important because, if a user is requesting to run an action they haven't been authorized for, you need to nip that request in the bud and send back the appropriate error/redirect before they're able to do anything else.  You're basically "filtering out" unauthorized requests.
+Before we talk about authentication, we need to cover controller actions.  The idea of these actions is to run some code in your controller at very specific times, for instance before any other code has been run.  That's important because, if a user is requesting to run an action they haven't been authorized for, you need to nip that request in the bud and send back the appropriate error/redirect before they're able to do anything else.  You're basically "filtering out" unauthorized requests.
 
-<span id="login-check">We do this through the use of a "before filter", which takes the name of the method we want to run:</span>
+<span id="login-check">We do this through the use of a "before action", which takes the name of the method we want to run:</span>
 
 ~~~ruby
   # app/controllers/users_controller
@@ -119,9 +119,9 @@ The `before_action` method takes the symbol of the method to run before anything
 
 You can specify to only apply the filter for specific actions by specifying the `only` option, e.g. `before_action :require_login, only: [:edit, :update]`.  The opposite applies by using the `:except` option... it will run for all actions except those specified.
 
-You'll want to hide your filter methods behind the `private` designation so they can only be used by that controller.
+You'll want to hide your action methods behind the `private` designation so they can only be used by that controller.
 
-Finally, filters are inherited so if you'd like a filter to apply to absolutely every controller action, put it in your `app/controllers/application_controller.rb` file.
+Finally, actions are inherited so if you'd like an action to apply to absolutely every controller action, put it in your `app/controllers/application_controller.rb` file.
 
 ### Authentication
 
